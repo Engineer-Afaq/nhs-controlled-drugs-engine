@@ -1,10 +1,36 @@
-Here is the complete, detailed README.md file ready for your GitHub repository. I have formatted it using standard Markdown so it will automatically look beautiful, with proper headings, bold text, and code blocks once you paste it in.
+### 🥇 Stage 4: The Display (Gold Layer & Power BI)
+Finally, all the perfectly clean numbers from PySpark and the brilliant text summaries from OpenAI are merged into the Gold Layer. This feeds directly into **Power BI**, creating an interactive map and dashboard where anyone can explore the data instantly.
 
-I’ve also included placeholder tags (like [Insert your screenshot here]) so you know exactly where to drop your images and code.
+**[INSERT A SECOND SCREENSHOT HERE SHOWING A SPECIFIC AI SUMMARY OR MAP]**
 
-Just copy everything inside the code block below and paste it into your GitHub editor!
+---
 
-Markdown
+## 🏗️ Tech Stack
+*   **Data Orchestration & Compute:** Microsoft Fabric, Apache Spark (PySpark)
+*   **Storage:** Delta Lake (Medallion Architecture)
+*   **AI/LLM Integration:** OpenAI API
+*   **Business Intelligence:** Power BI
+
+## 💰 Cost-Smart & Fully Scalable
+Cloud computing can get incredibly expensive. To be smart with funding, this project was designed as a static historical load (running the massive dataset from 2021 to 2025 once) rather than an auto-refreshing daily pipeline. This proves the concept works flawlessly while keeping compute costs near zero.
+
+However, the architecture is **fully enterprise-ready**. If adopted:
+1.  **Scale the Data:** We can simply remove the specific drug filter and ingest *every single drug* in the UK.
+2.  **Automate the Engine:** We can wrap this notebook in a Fabric Pipeline and schedule it to run automatically every single month.
+
+---
+
+## 🚀 Repository Contents
+*   `nhs_pipeline.ipynb`: The core PySpark notebook containing all extraction, transformation, and AI logic.
+*   `nhs_dashboard.pbix`: The Power BI dashboard file (requires Power BI Desktop to open).
+*   `/images`: FolderAh, I see exactly what happened! Sometimes when you copy code blocks that are nested inside another code block, GitHub's formatting gets confused and thinks the rest of the entire document is just one giant piece of Python code. 
+
+Let's fix that immediately. I am going to write the README below **without** the outer box. 
+
+Just highlight the text starting from `# 💊 The NHS Controlled Drugs Data Engine` all the way down to the bottom, copy it, and paste it directly into your GitHub README file.
+
+***
+
 # 💊 The NHS Controlled Drugs Data Engine
 
 ![Project Status](https://img.shields.io/badge/Status-Complete-brightgreen)
@@ -94,10 +120,6 @@ Automate the Engine: We can wrap this notebook in a Fabric Pipeline and schedule
 
 🚀 Repository Contents
 nhs_pipeline.ipynb: The core PySpark notebook containing all extraction, transformation, and AI logic.
-
-nhs_dashboard.pbix: The Power BI dashboard file (requires Power BI Desktop to open).
-
-/images: Folder containing screenshots of the working dashboard.
 
 nhs_dashboard.pbix: The Power BI dashboard file (requires Power BI Desktop to open).
 
