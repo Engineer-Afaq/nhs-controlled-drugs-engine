@@ -33,6 +33,25 @@ First, our PySpark engine connects to the NHS API. For this project, we successf
 
 The NHS API is notorious for rate limits and connection drops. To fix this, we built "digital shock absorbers." Our code handles API pagination automatically and uses exponential backoff—meaning if the NHS server gets overwhelmed, our engine politely waits and retries without crashing. All data is saved exactly as we found it into a **Delta Table**.
 ```python
-# [INSERT CODE SNIPPET 1 HERE]
-# Paste your code for: http_get_json, the retry/backoff logic, 
-# and the datastore_search_pages function that handles the API pagination.
+def datastore_fields(resource_id: str):
+    """
+    Get field IDs in original order using datastore_search metadata.
+    (NHSBSA doesn't expose datastore_info, so this is the reliable approach.)
+    """
+    payload = http_get_json(DATASTORE_SEARCH, params={"resource_id": resource_id, "limit": 0}, timeout=120)
+
+    fields = payload.get("result", {}).get("fields", None)
+    if not fields:
+        # fallback if portal doesn't return fields for limit=0 (rare): request 1 record
+        payload = http_get_json(DATASTORE_SEARCH, params={"resource_id": resource_id, "limit": 1}, timeout=120)
+        fields = payload["result"]["fields"]
+
+    ids = [f["id"] for f in fields]
+    if DROP_INTERNAL_ID:
+        ids = [c for c in ids if c != "_id"]
+    return ids
+
+RESOURCE_IDS = [f"EPD_SNOMED_{ym}" for ym in ym_range(START_YM, END_YM)]
+
+print(f"Resources: {len(RESOURCE_IDS)}")
+print("First:", RESOURCE_IDS[:3], "Last:", RESOURCE_IDS[-3:])
