@@ -57,7 +57,7 @@ print(f"Resources: {len(RESOURCE_IDS)}")
 print("First:", RESOURCE_IDS[:3], "Last:", RESOURCE_IDS[-3:])
 
 
-🥈 Stage 2: The Deep Clean (Silver Layer)
+### 🥈 Stage 2: The Deep Clean (Silver Layer)
 Next, we clean the data. The biggest technical hurdle was schema drift—the NHS constantly changes column names from year to year.
 
 We wrote PySpark functions that act as a universal translator. It maps old column names to new ones without deleting data. We then clean up the numbers—converting text into proper mathematical formats (bigint for quantities, decimal for costs) so the math on the dashboard is perfect.
@@ -92,7 +92,7 @@ def load_resource(resource_id: str, canonical_cols: list[str], canonical_fields_
     return month_df, pages, rows
 
 
-🧠 Stage 3: The AI Brain (OpenAI Integration)
+### 🧠 Stage 3: The AI Brain (OpenAI Integration)
 This is what sets this project apart. We don't just want to show numbers; we want to generate meaning.
 
 Once the data is clean, we securely pass the drug codes and trends to the OpenAI API. We prompt the AI to act as a medical explainer. It looks at the chemicals and automatically generates simple, plain-English summaries about:
@@ -106,14 +106,14 @@ What prolonged use actually does to the human brain.
 Summaries of prescribing trends.
 
 
-🥇 Stage 4: The Display (Gold Layer & Power BI)
+### 🥇 Stage 4: The Display (Gold Layer & Power BI)
 Finally, all the perfectly clean numbers from PySpark and the brilliant text summaries from OpenAI are merged into the Gold Layer. This feeds directly into Power BI, creating an interactive map and dashboard where anyone can explore the data instantly.
 
 <img width="1445" height="806" alt="Screenshot 2026-05-02 153757" src="https://github.com/user-attachments/assets/eac7823a-d16a-4adc-b3bf-b9f2890f152c" />
 <img width="1446" height="803" alt="Screenshot 2026-05-02 153728" src="https://github.com/user-attachments/assets/d3e81337-9714-4974-ab05-e85013a8f08a" />
 
 
-🏗️ Tech Stack
+### 🏗️ Tech Stack
 Data Orchestration & Compute: Microsoft Fabric, Apache Spark (PySpark)
 
 Storage: Delta Lake (Medallion Architecture)
@@ -122,7 +122,7 @@ AI/LLM Integration: OpenAI API
 
 Business Intelligence: Power BI
 
-💰 Cost-Smart & Fully Scalable
+### 💰 Cost-Smart & Fully Scalable
 Cloud computing can get incredibly expensive. To be smart with funding, this project was designed as a static historical load (running the massive dataset from 2021 to 2025 once) rather than an auto-refreshing daily pipeline. This proves the concept works flawlessly while keeping compute costs near zero.
 
 However, the architecture is fully enterprise-ready. If adopted:
@@ -131,7 +131,7 @@ Scale the Data: We can simply remove the specific drug filter and ingest every s
 
 Automate the Engine: We can wrap this notebook in a Fabric Pipeline and schedule it to run automatically every single month.
 
-🚀 Repository Contents
+### 🚀 Repository Contents
 nhs_pipeline.ipynb: The core PySpark notebook containing all extraction, transformation, and AI logic.
 
 nhs_dashboard.pbix: The Power BI dashboard file (requires Power BI Desktop to open).
