@@ -77,9 +77,36 @@ Next, we clean the data. The biggest technical hurdle was **schema drift**—the
 
 We wrote PySpark functions that act as a universal translator. It maps old column names to new ones without deleting data. We then clean up the numbers—converting text into proper mathematical formats (`bigint` for quantities, `decimal` for costs) so the math on the dashboard is perfect.
 ```python
-# [INSERT CODE SNIPPET 2 HERE]
-# Paste your code for: The schema drift rename_map, the safe column 
-# renaming functions, and the PySpark casting logic.
+ANONICAL_FIELDS = datastore_fields(CANONICAL_RESOURCE)
+
+def build_rename_map(old_fields: list[str], canonical_fields: list[str]) -> dict:
+    """
+    1) If same field count -> positional mapping old->canonical
+    2) Always overlay a guarded manual mapping (only if target exists in canonical)
+    """
+    mapping = {}
+
+    if len(old_fields) == len(canonical_fields):
+        mapping.update(dict(zip(old_fields, canonical_fields)))
+
+    def add(old_name: str, new_name: str):
+        if old_name in old_fields and new_name in canonical_fields:
+            mapping[old_name] = new_name
+
+    # Your known renames (guarded so we don't map to non-existent canonical targets)
+    add("BNF_CHEMICAL_SUBSTANCE", "BNF_CHEMICAL_SUBSTANCE_CODE")
+    add("CHEMICAL_SUBSTANCE_BNF_DESCR", "BNF_CHEMICAL_SUBSTANCE")  # only applies if canonical has this name
+
+    add("BNF_CODE", "BNF_PRESENTATION_CODE")
+    add("BNF_DESCRIPTION", "BNF_PRESENTATION_NAME")
+
+    add("STP_NAME", "ICB_NAME")
+    add("STP_CODE", "ICB_CODE")
+
+    return mapping
+
+print(f"Canonical field count ({CANONICAL_RESOURCE}): {len(CANONICAL_FIELDS)}")
+print("Example canonical fields:", CANONICAL_FIELDS[:12])
 ```
 
 ### 🧠 Stage 3: The AI Brain (OpenAI Integration)
