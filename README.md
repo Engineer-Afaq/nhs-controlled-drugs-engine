@@ -93,7 +93,7 @@ def build_rename_map(old_fields: list[str], canonical_fields: list[str]) -> dict
         if old_name in old_fields and new_name in canonical_fields:
             mapping[old_name] = new_name
 
-    # Your known renames (guarded so we don't map to non-existent canonical targets)
+    # known renames (guarded so we don't map to non-existent canonical targets)
     add("BNF_CHEMICAL_SUBSTANCE", "BNF_CHEMICAL_SUBSTANCE_CODE")
     add("CHEMICAL_SUBSTANCE_BNF_DESCR", "BNF_CHEMICAL_SUBSTANCE")  # only applies if canonical has this name
 
@@ -125,11 +125,31 @@ df_openai_key = spark.read.text("abfss://@onelake.dfs.fabric.microsoft.com//File
 openai_api_key = df_openai_key.collect()[0]['value'].strip()
 openai_base_url  = "https://api.openai.com/v1/chat/completions"
 model_name       = "gpt-5-nano"
+
+
+#                 "content": (
+#                     "You are an assistant that analyzes controll drugs from NHS official documentations and produces a structured response with the following format in British English:\n\n"
+#                     "1. What the medicine is.\n"
+#                     "2. What it is used for.\n"
+#                     "3. How it works\n"
+#                     "4. Why does may start low or change\n"
+#                     "5. Why it may need special control\n"
+#                     "6. Classification & GEneral Use\n" 
+#                     "7. Indications\n"
+#                     "8. Dosage & Administration\n" 
+#                     "9. Medical Forms\n"
+#                     "10. Safety Considerations\n"
+#                     "11. Legal & Regulatory Status\n"                      
+#                     "   - Provide one to 20 sentences depending on the text length.\n"
+#                     "Make sure the output strictly follows this format exactly as above."
+#                 )
+
 ```
 
 ### 🥇 Stage 4: The Display (Gold Layer & Power BI)
 Finally, all the perfectly clean numbers from PySpark and the brilliant text summaries from OpenAI are merged into the Gold Layer. This feeds directly into **Power BI**, creating an interactive map and dashboard where anyone can explore the data instantly.
 
+<img width="1445" height="806" alt="Screenshot 2026-05-02 153757" src="https://github.com/user-attachments/assets/70139cbd-8f0f-44fd-9f3b-7073bf0d50a7" />
 **[INSERT A SECOND SCREENSHOT HERE SHOWING A SPECIFIC AI SUMMARY OR MAP]**
 
 ---
