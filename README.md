@@ -4,6 +4,7 @@
 ![Tech Stack](https://img.shields.io/badge/Tech-Microsoft_Fabric%20%7C%20PySpark%20%7C%20Power_BI%20%7C%20OpenAI-blue)
 
 An automated data pipeline and interactive dashboard that extracts, cleans, and translates NHS controlled drug prescription data into human-readable insights.
+<img width="1446" height="803" alt="Screenshot 2026-05-02 153728" src="https://github.com/user-attachments/assets/852b56ab-068a-4c3a-8afb-9547970865e8" />
 
 **[INSERT YOUR BEST DASHBOARD SCREENSHOT HERE: e.g., `![Main Dashboard](./images/dashboard_main.png)`]**
 
