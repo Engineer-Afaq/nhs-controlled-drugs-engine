@@ -6,7 +6,6 @@
 An automated data pipeline and interactive dashboard that extracts, cleans, and translates NHS controlled drug prescription data into human-readable insights.
 <img width="1446" height="803" alt="Screenshot 2026-05-02 153728" src="https://github.com/user-attachments/assets/852b56ab-068a-4c3a-8afb-9547970865e8" />
 
-**[INSERT YOUR BEST DASHBOARD SCREENSHOT HERE: e.g., `![Main Dashboard](./images/dashboard_main.png)`]**
 
 ---
 
@@ -151,7 +150,6 @@ model_name       = "gpt-5-nano"
 Finally, all the perfectly clean numbers from PySpark and the brilliant text summaries from OpenAI are merged into the Gold Layer. This feeds directly into **Power BI**, creating an interactive map and dashboard where anyone can explore the data instantly.
 
 <img width="1445" height="806" alt="Screenshot 2026-05-02 153757" src="https://github.com/user-attachments/assets/70139cbd-8f0f-44fd-9f3b-7073bf0d50a7" />
-**[INSERT A SECOND SCREENSHOT HERE SHOWING A SPECIFIC AI SUMMARY OR MAP]**
 
 ---
 
