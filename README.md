@@ -118,9 +118,13 @@ Once the data is clean, we securely pass the drug codes and trends to the **Open
 3.  What prolonged use actually does to the human brain.
 4.  Summaries of prescribing trends.
 ```python
-# [INSERT CODE SNIPPET 3 HERE]
-# Paste your code for: The OpenAI API calls, how you pass the PySpark DataFrame 
-# rows to the model, and the specific prompts you use.
+# Read the text file from the ABFSS path
+df_openai_key = spark.read.text("abfss://@onelake.dfs.fabric.microsoft.com//Files/secret/openai/openai_key.txt")
+
+# Extract the key as a string (first line)
+openai_api_key = df_openai_key.collect()[0]['value'].strip()
+openai_base_url  = "https://api.openai.com/v1/chat/completions"
+model_name       = "gpt-5-nano"
 ```
 
 ### 🥇 Stage 4: The Display (Gold Layer & Power BI)
